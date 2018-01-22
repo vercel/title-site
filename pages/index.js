@@ -69,6 +69,14 @@ class Index extends PureComponent {
           <AutosizeInput {...settings} />
         </section>
 
+        <aside>
+          <nav>
+            <a href="https://github.com/zeit/title" target="_blank">Module</a>
+            <b/>
+            <a href="https://github.com/zeit/title-site" target="_blank">Website Source</a>
+          </nav>
+        </aside>
+
         <style jsx global>{`
           body {
             margin: 0;
@@ -122,6 +130,7 @@ class Index extends PureComponent {
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
+            flex-direction: column;
           }
 
           section {
@@ -140,7 +149,36 @@ class Index extends PureComponent {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-top: 50px;
+            padding: 50px 0 40px 0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+          }
+
+          aside nav {
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          aside nav a {
+            font-size: 13px;
+            color: #b2b2b2;
+            text-decoration: none;
+          }
+
+          aside nav a:hover {
+            color: #ff0080;
+          }
+
+          aside nav b {
+            display: block;
+            background: #b2b2b2;
+            width: 1px;
+            height: 100%;
+            margin: 0 10px;
           }
 
           p {
