@@ -1,4 +1,5 @@
 // Packages
+import Head from 'next/head'
 import { PureComponent } from 'react'
 import convertTitle from '@zeit/title'
 import AutosizeInput from 'react-input-autosize'
@@ -43,11 +44,21 @@ class Index extends PureComponent {
       autoComplete: 'off',
       autoCorrect: 'off',
       spellCheck: false,
-      ref: item => this.handler = item
+      ref: item => this.handler = item,
+      style: {
+        width: '100%'
+      }
     }
 
     return (
       <main>
+        <Head>
+          <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no"
+      />
+        </Head>
+
         <section>
           <h1>Capitalize Your Title</h1>
 
@@ -66,9 +77,18 @@ class Index extends PureComponent {
             -webkit-font-smoothing: antialiased;
           }
 
+          html,
+          body {
+            height: 100%;
+          }
+
+          body > div:first-child,
+          body > div:first-child > div:first-child,
+          body > div:first-child > div:first-child > div {
+            height: inherit;
+          }
+
           input {
-            min-width: 300px;
-            max-width: 620px;
             box-sizing: border-box;
             padding: 9.5px 15px;
             border: 0;
@@ -76,28 +96,37 @@ class Index extends PureComponent {
             border-bottom: 1px solid #d8d8d8;
             font-size: 14px;
             transition: border-bottom-color 100ms ease-in, color 100ms ease-in;
+            max-width: 200px;
+            border-radius: 0;
           }
 
           input:focus {
             outline: none;
             border-color: #000;
           }
+
+          @media (min-width: 768px) {
+            input {
+              min-width: 300px;
+              max-width: 620px;
+            }
+          }
         `}</style>
 
         <style jsx>{`
           main {
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
           }
 
           section {
             text-align: center;
+            max-width: 100%;
           }
 
           h1 {
