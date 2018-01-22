@@ -9,5 +9,11 @@
     "build": "next build"
   },
   "repository": "zeit/title-site",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@zeit/title": "1.0.1",
+    "next": "4.2.3",
+    "react": "16.2.0",
+    "react-dom": "16.2.0"
+  }
 }
