@@ -73,9 +73,11 @@ class Index extends PureComponent {
 
         <aside>
           <nav>
+            <a href="https://github.com/zeit/title-site" target="_blank">Source</a>
+            <b/>
             <a href="https://github.com/zeit/title" target="_blank">Module</a>
             <b/>
-            <a href="https://github.com/zeit/title-site" target="_blank">Website Source</a>
+            <a href="https://zeit.co" target="_blank">Hosted on Now</a>
           </nav>
         </aside>
 
