@@ -24,6 +24,14 @@ class Index extends PureComponent {
     event.preventDefault()
   }
 
+  componentDidMount() {
+    if (!this.handler) {
+      return
+    }
+
+    this.handler.input.focus()
+  }
+
   render() {
     const { value } = this.state
 
@@ -34,7 +42,8 @@ class Index extends PureComponent {
       placeholder: 'Paste or Enter Your Title',
       autoComplete: 'off',
       autoCorrect: 'off',
-      spellCheck: false
+      spellCheck: false,
+      ref: item => this.handler = item
     }
 
     return (
