@@ -9,7 +9,7 @@ ZEIT's product names are capitalized properly as well.
 2. Install the dependencies: `yarn`
 3. Run the development environment: `yarn dev`
 
-After that, you can use the website in the browser at `http://localhost:3000`.
+After that, you can use the site in the browser at `http://localhost:3000`.
 
 ## Author
 
