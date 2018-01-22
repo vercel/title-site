@@ -167,6 +167,7 @@ class Index extends PureComponent {
             font-size: 13px;
             color: #b2b2b2;
             text-decoration: none;
+            transition: color 100ms ease-in;
           }
 
           aside nav a:hover {
@@ -197,6 +198,12 @@ class Index extends PureComponent {
 
           a:hover {
             text-decoration: underline;
+          }
+
+          @media (max-height: 400px) {
+            aside {
+              display: none;
+            }
           }
         `}</style>
       </main>
