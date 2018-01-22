@@ -51,9 +51,9 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
-"@zeit/title@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@zeit/title/-/title-1.0.1.tgz#bba477af2860b55a09df53a5f5504cb951e5a993"
+"@zeit/title@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@zeit/title/-/title-2.0.0.tgz#ae1ef652c9357950f2fedb883886dcb11d4e578d"
   dependencies:
     arg "1.0.0"
     chalk "2.3.0"
