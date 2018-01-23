@@ -1,7 +1,7 @@
 // Packages
 import Head from 'next/head'
 import { PureComponent } from 'react'
-import convertTitle from '@zeit/title'
+import toTitle from 'title'
 import AutosizeInput from 'react-input-autosize'
 
 class Index extends PureComponent {
@@ -19,7 +19,7 @@ class Index extends PureComponent {
     const { value } = event.target
 
     this.setState({
-      value: convertTitle(value)
+      value: toTitle(value)
     })
 
     event.preventDefault()
