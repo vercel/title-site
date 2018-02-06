@@ -11,10 +11,10 @@
   "repository": "zeit/title-site",
   "license": "MIT",
   "dependencies": {
-    "next": "4.2.3",
+    "next": "5.0.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "react-input-autosize": "2.2.1",
-    "title": "3.1.1"
+    "title": "3.2.0"
   }
 }
