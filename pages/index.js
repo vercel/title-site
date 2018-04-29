@@ -9,7 +9,7 @@ class Index extends PureComponent {
     super(props)
 
     this.state = {
-      content: ''
+      value: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -17,10 +17,15 @@ class Index extends PureComponent {
 
   handleChange(event) {
     const { value } = event.target
-
+    const input = this.handler.input
+    const idx = input.selectionStart
+    const caretPosition = () => {
+      input.selectionStart = input.selectionEnd = idx
+    }
+    
     this.setState({
       value: toTitle(value)
-    })
+    }, caretPosition)
 
     event.preventDefault()
   }
