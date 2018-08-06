@@ -9,6 +9,7 @@ class Index extends PureComponent {
     super(props)
 
     this.state = {
+      replacingWithPaste: false,
       value: ''
     }
 
@@ -19,15 +20,30 @@ class Index extends PureComponent {
     const { value } = event.target
     const input = this.handler.input
     const idx = input.selectionStart
+    const { replacingWithPaste } = this.state
     const caretPosition = () => {
-      input.selectionStart = input.selectionEnd = idx
+      if (replacingWithPaste) {
+        input.selectionStart = 0
+        input.selectionEnd = input.value.length
+      } else {
+        input.selectionStart = input.selectionEnd = idx
+      }
     }
     
     this.setState({
+      replacingWithPaste: false,
       value: toTitle(value)
     }, caretPosition)
 
     event.preventDefault()
+  }
+  
+  handlePaste(event) {
+    const { value, selectionStart, selectionEnd } = this.handler.input
+    if (selectionStart !== 0 || selectionEnd !== value.length) {
+      return
+    }
+    this.setState({ replacingWithPaste: true })
   }
 
   componentDidMount() {
@@ -45,6 +61,7 @@ class Index extends PureComponent {
       type: 'text',
       value,
       onChange: this.handleChange,
+      onPaste: this.handlePaste,
       placeholder: 'Paste or Enter Your Title',
       autoComplete: 'off',
       autoCorrect: 'off',
