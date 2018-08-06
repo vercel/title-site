@@ -1,7 +1,6 @@
 # title site
 
-This is the website for [title](https://github.com/zeit/title). It correctly capitalizes your titles as per [The Chicago Manual of Style](http://www.chicagomanualofstyle.org/home.html). Furthermore, all of
-ZEIT's product names are capitalized properly as well.
+This is the website for [title](https://github.com/zeit/title). It correctly capitalizes your titles as per [The Chicago Manual of Style](http://www.chicagomanualofstyle.org/home.html). Furthermore, all of ZEIT's product names are capitalized properly as well.
 
 ## Contributing
 
