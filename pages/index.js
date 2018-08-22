@@ -14,6 +14,7 @@ class Index extends PureComponent {
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handlePaste = this.handlePaste.bind(this)
   }
 
   handleChange(event) {
