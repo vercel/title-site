@@ -1,5 +1,6 @@
 {
   "alias": "title.sh",
+  "version": 1,
   "type": "static",
   "static": {
     "directoryListing": false,
