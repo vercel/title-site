@@ -2,5 +2,34 @@
   "version": 2,
   "builds": [
     { "src": "package.json", "use": "@now/next" }
-  ]
+  ],
+  "routes": [
+    {
+      "src": "/_next/webpack/chunks/[^/]+",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "src": "/_next/static/commons/.+",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "src": "/_next/[^/]+/page/.+\\.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+	]
 }
