@@ -1,6 +1,6 @@
 // Packages
 import Head from 'next/head'
-import { PureComponent } from 'react'
+import { PureComponent } from 'react'
 import toTitle from 'title'
 import AutosizeInput from 'react-input-autosize'
 
@@ -30,15 +30,18 @@ class Index extends PureComponent {
         input.selectionStart = input.selectionEnd = idx
       }
     }
-    
-    this.setState({
-      replacingWithPaste: false,
-      value: toTitle(value)
-    }, caretPosition)
+
+    this.setState(
+      {
+        replacingWithPaste: false,
+        value: toTitle(value)
+      },
+      caretPosition
+    )
 
     event.preventDefault()
   }
-  
+
   handlePaste(event) {
     const { value, selectionStart, selectionEnd } = this.handler.input
     if (selectionStart !== 0 || selectionEnd !== value.length) {
@@ -67,7 +70,7 @@ class Index extends PureComponent {
       autoComplete: 'off',
       autoCorrect: 'off',
       spellCheck: false,
-      ref: item => this.handler = item,
+      ref: item => (this.handler = item),
       style: {
         width: '100%'
       }
@@ -79,35 +82,48 @@ class Index extends PureComponent {
           <title>Capitalize Your Title</title>
 
           <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, user-scalable=no"
-      />
+            name="viewport"
+            content="width=device-width, initial-scale=1, user-scalable=no"
+          />
         </Head>
 
         <section>
           <h1>Capitalize Your Title</h1>
 
-          <p>Enter your title below to get it capitalized properly
-          according to
-          the <a href="http://www.chicagomanualofstyle.org" target="_blank">The Chicago Manual of Style</a>:</p>
+          <p>
+            Enter your title below to get it capitalized properly according to
+            the{' '}
+            <a href="http://www.chicagomanualofstyle.org" target="_blank">
+              The Chicago Manual of Style
+            </a>
+            :
+          </p>
 
           <AutosizeInput {...settings} />
         </section>
 
         <aside>
           <nav>
-            <a href="https://github.com/zeit/title-site" target="_blank">Source</a>
-            <b/>
-            <a href="https://github.com/zeit/title" target="_blank">Module</a>
-            <b/>
-            <a href="https://zeit.co" target="_blank">Hosted on Now</a>
+            <a href="https://github.com/zeit/title-site" target="_blank">
+              Source
+            </a>
+            <b />
+            <a href="https://github.com/zeit/title" target="_blank">
+              Module
+            </a>
+            <b />
+            <a href="https://zeit.co" target="_blank">
+              Hosted on Now
+            </a>
           </nav>
         </aside>
 
         <style jsx global>{`
           body {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+              'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+              'Helvetica Neue', sans-serif;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
           }
