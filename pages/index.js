@@ -11,24 +11,18 @@ const Index = () => {
 
   const handleChange = event => {
     const { value } = event.target
-    const input = handler.current.input
-    const idx = input.selectionStart
-
-    const caretPosition = () => {
-      if (replacingWithPaste) {
-        input.selectionStart = 0
-        input.selectionEnd = input.value.length
-      } else {
-        input.selectionStart = input.selectionEnd = idx
-      }
-    }
-    setReplacingWithPaste(false)
     setValue(toTitle(value))
-
-    caretPosition()
-
+    setReplacingWithPaste(false)
     event.preventDefault()
   }
+
+  // caretPosition
+  useEffect(() => {
+    const input = handler.current.input
+    const idx = input.selectionStart
+    input.selectionStart = 0
+    input.selectionEnd = input.value.length
+  }, [replacingWithPaste])
 
   const handlePaste = event => {
     const { value, selectionStart, selectionEnd } = handler.current.input
