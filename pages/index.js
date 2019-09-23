@@ -1,27 +1,19 @@
 // Packages
 import Head from 'next/head'
-import { PureComponent } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import toTitle from 'title'
 import AutosizeInput from 'react-input-autosize'
 
-class Index extends PureComponent {
-  constructor(props) {
-    super(props)
+const Index = () => {
+  const [replacingWithPaste, setReplacingWithPaste] = useState(false)
+  const [value, setValue] = useState('')
+  const handler = useRef(null)
 
-    this.state = {
-      replacingWithPaste: false,
-      value: ''
-    }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.handlePaste = this.handlePaste.bind(this)
-  }
-
-  handleChange(event) {
+  const handleChange = event => {
     const { value } = event.target
-    const input = this.handler.input
+    const input = handler.current.input
     const idx = input.selectionStart
-    const { replacingWithPaste } = this.state
+
     const caretPosition = () => {
       if (replacingWithPaste) {
         input.selectionStart = 0
@@ -30,228 +22,216 @@ class Index extends PureComponent {
         input.selectionStart = input.selectionEnd = idx
       }
     }
+    setReplacingWithPaste(false)
+    setValue(toTitle(value))
 
-    this.setState(
-      {
-        replacingWithPaste: false,
-        value: toTitle(value)
-      },
-      caretPosition
-    )
+    caretPosition()
 
     event.preventDefault()
   }
 
-  handlePaste(event) {
-    const { value, selectionStart, selectionEnd } = this.handler.input
+  const handlePaste = event => {
+    const { value, selectionStart, selectionEnd } = handler.current.input
     if (selectionStart !== 0 || selectionEnd !== value.length) {
       return
     }
-    this.setState({ replacingWithPaste: true })
+    setReplacingWithPaste(true)
   }
 
-  componentDidMount() {
-    if (!this.handler) {
-      return
-    }
+  useEffect(() => {
+    handler && handler.current.input.focus()
+    return () => {}
+  }, [handler])
 
-    this.handler.input.focus()
+  const settings = {
+    type: 'text',
+    value,
+    onChange: handleChange,
+    onPaste: handlePaste,
+    placeholder: 'Paste or Enter Your Title',
+    autoComplete: 'off',
+    autoCorrect: 'off',
+    spellCheck: false,
+    ref: handler,
+    style: {
+      width: '100%'
+    }
   }
 
-  render() {
-    const { value } = this.state
+  return (
+    <main>
+      <Head>
+        <title>Capitalize Your Title</title>
 
-    const settings = {
-      type: 'text',
-      value,
-      onChange: this.handleChange,
-      onPaste: this.handlePaste,
-      placeholder: 'Paste or Enter Your Title',
-      autoComplete: 'off',
-      autoCorrect: 'off',
-      spellCheck: false,
-      ref: item => (this.handler = item),
-      style: {
-        width: '100%'
-      }
-    }
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no"
+        />
+      </Head>
 
-    return (
-      <main>
-        <Head>
-          <title>Capitalize Your Title</title>
+      <section>
+        <h1>Capitalize Your Title</h1>
 
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, user-scalable=no"
-          />
-        </Head>
+        <p>
+          Enter your title below to get it capitalized properly according to the{' '}
+          <a href="http://www.chicagomanualofstyle.org" target="_blank">
+            The Chicago Manual of Style
+          </a>
+          :
+        </p>
 
-        <section>
-          <h1>Capitalize Your Title</h1>
+        <AutosizeInput {...settings} />
+      </section>
 
-          <p>
-            Enter your title below to get it capitalized properly according to
-            the{' '}
-            <a href="http://www.chicagomanualofstyle.org" target="_blank">
-              The Chicago Manual of Style
-            </a>
-            :
-          </p>
+      <aside>
+        <nav>
+          <a href="https://github.com/zeit/title-site" target="_blank">
+            Source
+          </a>
+          <b />
+          <a href="https://github.com/zeit/title" target="_blank">
+            Module
+          </a>
+          <b />
+          <a href="https://zeit.co" target="_blank">
+            Hosted on Now
+          </a>
+        </nav>
+      </aside>
 
-          <AutosizeInput {...settings} />
-        </section>
+      <style jsx global>{`
+        body {
+          margin: 0;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+            'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+            'Helvetica Neue', sans-serif;
+          text-rendering: optimizeLegibility;
+          -webkit-font-smoothing: antialiased;
+        }
 
-        <aside>
-          <nav>
-            <a href="https://github.com/zeit/title-site" target="_blank">
-              Source
-            </a>
-            <b />
-            <a href="https://github.com/zeit/title" target="_blank">
-              Module
-            </a>
-            <b />
-            <a href="https://zeit.co" target="_blank">
-              Hosted on Now
-            </a>
-          </nav>
-        </aside>
+        html,
+        body {
+          height: 100%;
+        }
 
-        <style jsx global>{`
-          body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-              'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-              'Helvetica Neue', sans-serif;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
-          }
+        body > div:first-child,
+        body > div:first-child > div:first-child,
+        body > div:first-child > div:first-child > div {
+          height: inherit;
+        }
 
-          html,
-          body {
-            height: 100%;
-          }
+        input {
+          box-sizing: border-box;
+          padding: 9.5px 15px;
+          border: 0;
+          text-align: center;
+          border-bottom: 1px solid #d8d8d8;
+          font-size: 14px;
+          transition: border-bottom-color 100ms ease-in, color 100ms ease-in;
+          max-width: 200px;
+          border-radius: 0;
+        }
 
-          body > div:first-child,
-          body > div:first-child > div:first-child,
-          body > div:first-child > div:first-child > div {
-            height: inherit;
-          }
+        input:focus {
+          outline: none;
+          border-color: #000;
+        }
 
+        @media (min-width: 768px) {
           input {
-            box-sizing: border-box;
-            padding: 9.5px 15px;
-            border: 0;
-            text-align: center;
-            border-bottom: 1px solid #d8d8d8;
-            font-size: 14px;
-            transition: border-bottom-color 100ms ease-in, color 100ms ease-in;
-            max-width: 200px;
-            border-radius: 0;
+            min-width: 300px;
+            max-width: 620px;
           }
+        }
+      `}</style>
 
-          input:focus {
-            outline: none;
-            border-color: #000;
-          }
+      <style jsx>{`
+        main {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+          box-sizing: border-box;
+          flex-direction: column;
+        }
 
-          @media (min-width: 768px) {
-            input {
-              min-width: 300px;
-              max-width: 620px;
-            }
-          }
-        `}</style>
+        section {
+          text-align: center;
+          max-width: 100%;
+        }
 
-        <style jsx>{`
-          main {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            flex-direction: column;
-          }
+        h1 {
+          font-weight: normal;
+          font-size: 24px;
+          text-align: center;
+          margin-bottom: 25px;
+        }
 
-          section {
-            text-align: center;
-            max-width: 100%;
-          }
+        aside {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 50px 0 40px 0;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
 
-          h1 {
-            font-weight: normal;
-            font-size: 24px;
-            text-align: center;
-            margin-bottom: 25px;
-          }
+        aside nav {
+          height: 18px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
 
+        aside nav a {
+          font-size: 13px;
+          color: #b2b2b2;
+          text-decoration: none;
+          transition: color 100ms ease-in;
+        }
+
+        aside nav a:hover {
+          color: #ff0080;
+        }
+
+        aside nav b {
+          display: block;
+          background: #b2b2b2;
+          width: 1px;
+          height: 100%;
+          margin: 0 10px;
+        }
+
+        p {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 24px;
+          max-width: 390px;
+          text-align: center;
+          margin: 14px auto 30px auto;
+        }
+
+        a {
+          text-decoration: none;
+          color: #ff0080;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+
+        @media (max-height: 400px) {
           aside {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 50px 0 40px 0;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            display: none;
           }
-
-          aside nav {
-            height: 18px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          aside nav a {
-            font-size: 13px;
-            color: #b2b2b2;
-            text-decoration: none;
-            transition: color 100ms ease-in;
-          }
-
-          aside nav a:hover {
-            color: #ff0080;
-          }
-
-          aside nav b {
-            display: block;
-            background: #b2b2b2;
-            width: 1px;
-            height: 100%;
-            margin: 0 10px;
-          }
-
-          p {
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 24px;
-            max-width: 390px;
-            text-align: center;
-            margin: 14px auto 30px auto;
-          }
-
-          a {
-            text-decoration: none;
-            color: #ff0080;
-          }
-
-          a:hover {
-            text-decoration: underline;
-          }
-
-          @media (max-height: 400px) {
-            aside {
-              display: none;
-            }
-          }
-        `}</style>
-      </main>
-    )
-  }
+        }
+      `}</style>
+    </main>
+  )
 }
 
 export default Index
