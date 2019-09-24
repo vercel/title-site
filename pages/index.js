@@ -19,7 +19,6 @@ const Index = () => {
   // caretPosition
   useEffect(() => {
     const input = handler.current.input
-    const idx = input.selectionStart
     input.selectionStart = 0
     input.selectionEnd = input.value.length
   }, [replacingWithPaste])
@@ -34,7 +33,6 @@ const Index = () => {
 
   useEffect(() => {
     handler && handler.current.input.focus()
-    return () => {}
   }, [handler])
 
   const settings = {
