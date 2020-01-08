@@ -104,6 +104,10 @@ class Index extends PureComponent {
         </aside>
 
         <style jsx global>{`
+          :root {
+            supported-color-schemes: light dark;
+          }
+
           body {
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
@@ -145,6 +149,22 @@ class Index extends PureComponent {
             input {
               min-width: 300px;
               max-width: 620px;
+            }
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #000;
+              color: #fff;
+            }
+
+            input {
+              background-color: #000;
+              border-color: #444;
+            }
+
+            input:focus {
+              border-color: #fff;
             }
           }
         `}</style>
@@ -231,6 +251,12 @@ class Index extends PureComponent {
           @media (max-height: 400px) {
             aside {
               display: none;
+            }
+          }
+
+          @media (prefers-color-scheme: dark) {
+            aside nav b {
+              background: #444;
             }
           }
         `}</style>
