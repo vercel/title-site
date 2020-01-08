@@ -154,12 +154,12 @@ class Index extends PureComponent {
 
           @media (prefers-color-scheme: dark) {
             body {
-              background: #000;
+              background: #1e1e1e;
               color: #fff;
             }
 
             input {
-              background: #000;
+              background: #1e1e1e;
               border-color: #444;
             }
 
