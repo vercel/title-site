@@ -1,6 +1,6 @@
 # title site
 
-This is the website for [title](https://github.com/zeit/title). It correctly capitalizes your titles as per [The Chicago Manual of Style](http://www.chicagomanualofstyle.org/home.html). Furthermore, all of ZEIT's product names are capitalized properly as well.
+This is the website for [title](https://github.com/vercel/title). It correctly capitalizes your titles as per [The Chicago Manual of Style](http://www.chicagomanualofstyle.org/home.html). Furthermore, all of Vercel's product names are capitalized properly as well.
 
 ## Contributing
 
@@ -12,4 +12,4 @@ After that, you can use the site in the browser at `http://localhost:3000`.
 
 ## Author
 
-Leo Lamprecht ([@notquiteleo](https://twitter.com/notquiteleo)) - [ZEIT](https://zeit.co)
+Leo Lamprecht ([@notquiteleo](https://twitter.com/notquiteleo)) - [Vercel](https://vercel.com)
