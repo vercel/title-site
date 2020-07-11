@@ -1,62 +1,65 @@
 // Packages
-import Head from 'next/head'
-import { PureComponent } from 'react'
-import toTitle from 'title'
-import AutosizeInput from 'react-input-autosize'
+import Head from 'next/head';
+import { PureComponent } from 'react';
+import toTitle from 'title';
+import AutosizeInput from 'react-input-autosize';
 
 class Index extends PureComponent {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       replacingWithPaste: false,
-      value: ''
-    }
+      value: '',
+    };
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handlePaste = this.handlePaste.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handlePaste = this.handlePaste.bind(this);
   }
 
   handleChange(event) {
-    const { value } = event.target
-    const input = this.handler.input
-    const idx = input.selectionStart
-    const { replacingWithPaste } = this.state
+    const { value } = event.target;
+    const input = this.handler.input;
+    const idx = input.selectionStart;
+    const { replacingWithPaste } = this.state;
     const caretPosition = () => {
       if (replacingWithPaste) {
-        input.selectionStart = 0
-        input.selectionEnd = input.value.length
+        input.selectionStart = 0;
+        input.selectionEnd = input.value.length;
       } else {
-        input.selectionStart = input.selectionEnd = idx
+        input.selectionStart = input.selectionEnd = idx;
       }
-    }
-    
-    this.setState({
-      replacingWithPaste: false,
-      value: toTitle(value)
-    }, caretPosition)
+    };
 
-    event.preventDefault()
+    this.setState(
+      {
+        replacingWithPaste: false,
+        value: toTitle(value),
+      },
+      caretPosition
+    );
+
+    event.preventDefault();
   }
-  
+
   handlePaste(event) {
-    const { value, selectionStart, selectionEnd } = this.handler.input
+    const { value, selectionStart, selectionEnd } = this.handler.input;
     if (selectionStart !== 0 || selectionEnd !== value.length) {
-      return
+      return;
     }
-    this.setState({ replacingWithPaste: true })
+    this.setState({ replacingWithPaste: true });
   }
 
   componentDidMount() {
     if (!this.handler) {
-      return
+      return;
     }
 
-    this.handler.input.focus()
+    this.handler.input.focus();
   }
 
   render() {
-    const { value } = this.state
+    const { value } = this.state;
 
     const settings = {
       type: 'text',
@@ -67,11 +70,11 @@ class Index extends PureComponent {
       autoComplete: 'off',
       autoCorrect: 'off',
       spellCheck: false,
-      ref: item => this.handler = item,
+      ref: (item) => (this.handler = item),
       style: {
-        width: '100%'
-      }
-    }
+        width: '100%',
+      },
+    };
 
     return (
       <main>
@@ -79,35 +82,48 @@ class Index extends PureComponent {
           <title>Capitalize Your Title</title>
 
           <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, user-scalable=no"
-      />
+            name="viewport"
+            content="width=device-width, initial-scale=1, user-scalable=no"
+          />
         </Head>
 
         <section>
           <h1>Capitalize Your Title</h1>
 
-          <p>Enter your title below to get it capitalized properly
-          according to
-          the <a href="http://www.chicagomanualofstyle.org" target="_blank">The Chicago Manual of Style</a>:</p>
+          <p>
+            Enter your title below to get it capitalized properly according to
+            the{' '}
+            <a href="http://www.chicagomanualofstyle.org" target="_blank">
+              The Chicago Manual of Style
+            </a>
+            :
+          </p>
 
           <AutosizeInput {...settings} />
         </section>
 
         <aside>
           <nav>
-            <a href="https://github.com/zeit/title-site" target="_blank">Source</a>
-            <b/>
-            <a href="https://github.com/zeit/title" target="_blank">Module</a>
-            <b/>
-            <a href="https://zeit.co" target="_blank">Hosted on Now</a>
+            <a href="https://github.com/vercel/title-site" target="_blank">
+              Source
+            </a>
+            <b />
+            <a href="https://github.com/vercel/title" target="_blank">
+              Module
+            </a>
+            <b />
+            <a href="https://vercel.com" target="_blank">
+              Hosted on Vercel
+            </a>
           </nav>
         </aside>
 
         <style jsx global>{`
           body {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+              'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+              'Helvetica Neue', sans-serif;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
           }
@@ -234,8 +250,8 @@ class Index extends PureComponent {
           }
         `}</style>
       </main>
-    )
+    );
   }
 }
 
-export default Index
+export default Index;
