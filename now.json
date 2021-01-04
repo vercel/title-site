@@ -1,6 +1,0 @@
-{
-  "version": 2,
-  "name": "title",
-  "public": true,
-  "builds": [{ "src": "next.config.js", "use": "@now/next" }]
-}
