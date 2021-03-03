@@ -12,7 +12,7 @@
   "repository": "vercel/title-site",
   "license": "MIT",
   "dependencies": {
-    "next": "6.1.1",
+    "next": "9.3.2",
     "react": "16.4.2",
     "react-dom": "16.4.2",
     "react-input-autosize": "2.2.1",
