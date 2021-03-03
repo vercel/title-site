@@ -52,6 +52,7 @@ const Index = () => {
     <main>
       <Head>
         <title>Capitalize Your Title</title>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <section>
