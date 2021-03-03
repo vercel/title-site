@@ -9,7 +9,7 @@
     "build": "next build",
     "export": "next export"
   },
-  "repository": "zeit/title-site",
+  "repository": "vercel/title-site",
   "license": "MIT",
   "dependencies": {
     "next": "6.1.1",
