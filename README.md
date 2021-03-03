@@ -1,4 +1,4 @@
-# title site
+# Title Site
 
 This is the website for [title](https://github.com/vercel/title). It correctly capitalizes your titles as per [The Chicago Manual of Style](http://www.chicagomanualofstyle.org/home.html). Furthermore, all of Vercel's product names are capitalized properly as well.
 

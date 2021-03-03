@@ -9,7 +9,7 @@ class Index extends PureComponent {
     value: ''
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { value } = event.target
     const input = this.handler.input
     const idx = input.selectionStart
@@ -34,7 +34,7 @@ class Index extends PureComponent {
     event.preventDefault()
   }
 
-  handlePaste = event => {
+  handlePaste = (event) => {
     const { value, selectionStart, selectionEnd } = this.handler.input
     if (selectionStart !== 0 || selectionEnd !== value.length) {
       return
@@ -60,7 +60,7 @@ class Index extends PureComponent {
       autoComplete: 'off',
       autoCorrect: 'off',
       spellCheck: false,
-      ref: item => (this.handler = item),
+      ref: (item) => (this.handler = item),
       style: {
         width: '100%'
       }
@@ -89,15 +89,24 @@ class Index extends PureComponent {
 
         <aside>
           <nav>
-            <a href="https://github.com/vercel/title-site" target="_blank">Source</a>
-            <b/>
-            <a href="https://github.com/vercel/title" target="_blank">Module</a>
-            <b/>
-            <a href="https://vercel.com" target="_blank">Hosted on Vercel</a>
+            <a href="https://github.com/vercel/title-site" target="_blank">
+              Source
+            </a>
+            <b />
+            <a href="https://github.com/vercel/title" target="_blank">
+              Module
+            </a>
+            <b />
+            <a href="https://vercel.com" target="_blank">
+              Hosted on Vercel
+            </a>
           </nav>
         </aside>
 
         <style jsx global>{`
+          :root {
+            supported-color-schemes: light dark;
+          }
           body {
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
@@ -106,18 +115,15 @@ class Index extends PureComponent {
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
           }
-
           html,
           body {
             height: 100%;
           }
-
           body > div:first-child,
           body > div:first-child > div:first-child,
           body > div:first-child > div:first-child > div {
             height: inherit;
           }
-
           input {
             box-sizing: border-box;
             padding: 9.5px 15px;
@@ -129,16 +135,28 @@ class Index extends PureComponent {
             max-width: 200px;
             border-radius: 0;
           }
-
           input:focus {
             outline: none;
             border-color: #000;
           }
-
           @media (min-width: 768px) {
             input {
               min-width: 300px;
               max-width: 620px;
+            }
+          }
+          @media (prefers-color-scheme: dark) {
+            body {
+              background: #1e1e1e;
+              color: #fff;
+            }
+            input {
+              background: #1e1e1e;
+              border-color: #444;
+              color: #fff;
+            }
+            input:focus {
+              border-color: #fff;
             }
           }
         `}</style>
@@ -154,19 +172,16 @@ class Index extends PureComponent {
             box-sizing: border-box;
             flex-direction: column;
           }
-
           section {
             text-align: center;
             max-width: 100%;
           }
-
           h1 {
             font-weight: normal;
             font-size: 24px;
             text-align: center;
             margin-bottom: 25px;
           }
-
           aside {
             display: flex;
             justify-content: center;
@@ -177,25 +192,21 @@ class Index extends PureComponent {
             left: 0;
             right: 0;
           }
-
           aside nav {
             height: 18px;
             display: flex;
             justify-content: center;
             align-items: center;
           }
-
           aside nav a {
             font-size: 13px;
             color: #b2b2b2;
             text-decoration: none;
             transition: color 100ms ease-in;
           }
-
           aside nav a:hover {
             color: #ff0080;
           }
-
           aside nav b {
             display: block;
             background: #b2b2b2;
@@ -203,7 +214,6 @@ class Index extends PureComponent {
             height: 100%;
             margin: 0 10px;
           }
-
           p {
             font-weight: 400;
             font-size: 14px;
@@ -212,19 +222,21 @@ class Index extends PureComponent {
             text-align: center;
             margin: 14px auto 30px auto;
           }
-
           a {
             text-decoration: none;
             color: #ff0080;
           }
-
           a:hover {
             text-decoration: underline;
           }
-
           @media (max-height: 400px) {
             aside {
               display: none;
+            }
+          }
+          @media (prefers-color-scheme: dark) {
+            aside nav b {
+              background: #444;
             }
           }
         `}</style>
