@@ -6,16 +6,18 @@
   "scripts": {
     "dev": "next",
     "start": "next start",
-    "build": "next build",
-    "export": "next export"
+    "build": "next build"
   },
   "repository": "vercel/title-site",
   "license": "MIT",
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
-    "next": "6.1.1",
-    "react": "16.4.2",
-    "react-dom": "16.4.2",
-    "react-input-autosize": "2.2.1",
-    "title": "3.4.1"
+    "next": "^9.1.7",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-input-autosize": "^2.2.2",
+    "title": "^3.4.1"
   }
 }
