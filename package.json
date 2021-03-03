@@ -8,7 +8,7 @@
     "start": "next start",
     "build": "next build"
   },
-  "repository": "zeit/title-site",
+  "repository": "vercel/title-site",
   "license": "MIT",
   "engines": {
     "node": "12.x"

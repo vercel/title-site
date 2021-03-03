@@ -89,17 +89,11 @@ class Index extends PureComponent {
 
         <aside>
           <nav>
-            <a href="https://github.com/zeit/title-site" target="_blank">
-              Source
-            </a>
-            <b />
-            <a href="https://github.com/zeit/title" target="_blank">
-              Module
-            </a>
-            <b />
-            <a href="https://zeit.co" target="_blank">
-              Hosted on Now
-            </a>
+            <a href="https://github.com/vercel/title-site" target="_blank">Source</a>
+            <b/>
+            <a href="https://github.com/vercel/title" target="_blank">Module</a>
+            <b/>
+            <a href="https://vercel.com" target="_blank">Hosted on Vercel</a>
           </nav>
         </aside>
 
