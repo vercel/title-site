@@ -334,10 +334,10 @@ supports-color@^4.0.0:
   dependencies:
     has-flag "^2.0.0"
 
-title@^3.4.3:
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/title/-/title-3.4.3.tgz#76ef6b398310a7814120634620e47849481485d3"
-  integrity sha512-h7KKI5jNaAjGtym8ukn4IrIF3Uae19rlhGmpMst/mB7Ipi/vkNEJkeNfDJwUXi0h+AdGmldcUYQnO+9XMcunjg==
+title@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/title/-/title-3.5.2.tgz#21596db334a55239d93b68525315b12da09624a9"
+  integrity sha512-PD9x2repsKvhDr/aE8mz9JlcyGKbTPOhIRraioVi9gc8AZEVok875UPFnWHFs97ddIomPC/oThpENPx3HhV5kg==
   dependencies:
     arg "1.0.0"
     chalk "2.3.0"
