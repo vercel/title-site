@@ -6,12 +6,26 @@ import AutosizeInput from 'react-input-autosize'
 const Index = () => {
   const [replacingWithPaste, setReplacingWithPaste] = useState(false)
   const [value, setValue] = useState('')
+  const [copyStatus, setCopyStatus] = useState(false)
   const handler = useRef(null)
 
   const handleChange = (event) => {
     setValue(toTitle(event.target.value))
     setReplacingWithPaste(false)
     event.preventDefault()
+  }
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopyStatus(true)
+      setTimeout(() => {
+        setCopyStatus(false)
+      }, 500)
+    } catch (err) {
+      setCopyStatus(false)
+      console.error('Failed to copy: ', err)
+    }
   }
 
   // Input caret position
@@ -66,7 +80,26 @@ const Index = () => {
           :
         </p>
 
-        <AutosizeInput {...settings} />
+        <div>
+          <AutosizeInput {...settings} />
+
+          <button onClick={handleCopy} aria-label="Copy to Clipboard" title="Copy to Clipboard">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={`${copyStatus ? '#34d399' : '#000'}`}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
       </section>
 
       <aside>
@@ -220,6 +253,15 @@ const Index = () => {
           aside nav b {
             background: #444;
           }
+        }
+        section > div {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+        button {
+          background-color: transparent;
+          border: none;
         }
       `}</style>
     </main>
