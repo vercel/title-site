@@ -4,49 +4,25 @@ import toTitle from 'title'
 import AutosizeInput from 'react-input-autosize'
 
 const Index = () => {
-  const [replacingWithPaste, setReplacingWithPaste] = useState(false)
-  const [value, setValue] = useState('')
+  const [selectAll, setSelectAll] = useState(false)
+  const [inputValue, setInputValue] = useState('')
+  const [selection, setSelection] = useState(null)
   const handler = useRef(null)
 
-  const handleChange = (event) => {
-    setValue(toTitle(event.target.value))
-    setReplacingWithPaste(false)
-    event.preventDefault()
-  }
-
-  // Input caret position
   useEffect(() => {
-    const input = handler.current.input
-    input.selectionStart = 0
-    input.selectionEnd = input.value.length
-  }, [replacingWithPaste])
-
-  const handlePaste = (event) => {
-    const { value, selectionStart, selectionEnd } = handler.current.input
-    if (selectionStart !== 0 || selectionEnd !== value.length) {
-      return
-    }
-    setReplacingWithPaste(true)
-  }
+    setSelection({
+      selectionStart: 0,
+      selectionEnd: handler.current.input.value.length
+    })
+  }, [selectAll])
 
   useEffect(() => {
-    handler && handler.current.input.focus()
-  }, [handler])
-
-  const settings = {
-    type: 'text',
-    value,
-    onChange: handleChange,
-    onPaste: handlePaste,
-    placeholder: 'Paste or Enter Your Title',
-    autoComplete: 'off',
-    autoCorrect: 'off',
-    spellCheck: false,
-    ref: handler,
-    style: {
-      width: '100%'
+    if (selection) {
+      const { selectionStart, selectionEnd } = selection
+      handler.current.input.selectionStart = selectionStart
+      handler.current.input.selectionEnd = selectionEnd
     }
-  }
+  }, [selection, inputValue])
 
   return (
     <main>
@@ -66,7 +42,31 @@ const Index = () => {
           :
         </p>
 
-        <AutosizeInput {...settings} />
+        <AutosizeInput
+          type="text"
+          placeholder="Paste or Enter Your Title"
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck={false}
+          ref={handler}
+          style={{ width: '100%' }}
+          value={inputValue}
+          onChange={(event) => {
+            const { value, selectionStart, selectionEnd } = event.target
+            setSelection({ selectionStart, selectionEnd })
+            setInputValue(toTitle(value))
+            setSelectAll(false)
+          }}
+          onPaste={(event) => {
+            const { selectionStart, selectionEnd } = event.target
+            if (
+              selectionEnd === -1 ||
+              (selectionStart === 0 && selectionEnd === inputValue.length)
+            ) {
+              setSelectAll(true)
+            }
+          }}
+        />
       </section>
 
       <aside>
