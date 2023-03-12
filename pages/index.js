@@ -35,7 +35,7 @@ const Index = () => {
         <h1>Capitalize Your Title</h1>
 
         <p>
-          Enter your title below to get it capitalized properly according to the{' '}
+          Enter your title below to get it capitalized properly according to{' '}
           <a href="http://www.chicagomanualofstyle.org" target="_blank">
             The Chicago Manual of Style
           </a>
