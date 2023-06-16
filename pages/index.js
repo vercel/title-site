@@ -24,6 +24,10 @@ const Index = () => {
     }
   }, [selection, inputValue])
 
+  useEffect(() => {
+    handler.current.focus()
+  }, [])
+
   return (
     <main>
       <Head>
