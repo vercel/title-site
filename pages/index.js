@@ -33,10 +33,6 @@ const Index = () => {
       <Head>
         <title>Capitalize Your Title</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1"
-        />
       </Head>
 
       <section>
@@ -120,7 +116,7 @@ const Index = () => {
           border: 0;
           text-align: center;
           border-bottom: 1px solid #d8d8d8;
-          font-size: 14px;
+          font-size: 16px;
           transition: border-bottom-color 100ms ease-in, color 100ms ease-in;
           max-width: 200px;
           border-radius: 0;
