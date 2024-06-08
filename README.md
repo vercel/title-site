@@ -12,4 +12,4 @@ After that, you can use the site in the browser at `http://localhost:3000`.
 
 ## Author
 
-Leo Lamprecht ([@notquiteleo](https://twitter.com/notquiteleo)) - [Vercel](https://vercel.com)
+Leo Lamprecht ([@leo](https://x.com/leo)) - [Vercel](https://vercel.com)
