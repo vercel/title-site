@@ -1,12 +1,14 @@
 import Head from 'next/head'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, createRef } from 'react'
 import toTitle from 'title'
 import AutosizeInput from 'react-input-autosize'
+import { MdContentCopy, MdDone } from 'react-icons/md'
 
 const Index = () => {
   const [selectAll, setSelectAll] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [selection, setSelection] = useState(null)
+  const [isCopySuccess, setIsCopySuccess] = useState(false)
   const handler = useRef(null)
 
   useEffect(() => {
@@ -28,6 +30,17 @@ const Index = () => {
     handler.current.focus()
   }, [])
 
+  const handleCopy = () => {
+    // Perform the copy operation
+    setIsCopySuccess(true)
+
+    navigator.clipboard.writeText(inputValue)
+    // Reset success message after a while (if needed)
+    setTimeout(() => {
+      setIsCopySuccess(false)
+    }, 1000)
+  }
+
   return (
     <main>
       <Head>
@@ -46,31 +59,82 @@ const Index = () => {
           :
         </p>
 
-        <AutosizeInput
-          type="text"
-          placeholder="Paste or Enter Your Title"
-          autoComplete="off"
-          autoCorrect="off"
-          spellCheck={false}
-          ref={handler}
-          style={{ width: '100%' }}
-          value={inputValue}
-          onChange={(event) => {
-            const { value, selectionStart, selectionEnd } = event.target
-            setSelection({ selectionStart, selectionEnd })
-            setInputValue(toTitle(value))
-            setSelectAll(false)
-          }}
-          onPaste={(event) => {
-            const { selectionStart, selectionEnd } = event.target
-            if (
-              selectionEnd === -1 ||
-              (selectionStart === 0 && selectionEnd === inputValue.length)
-            ) {
-              setSelectAll(true)
-            }
-          }}
-        />
+        <div className="input-div">
+          <AutosizeInput
+            type="text"
+            placeholder="Paste or Enter Your Title"
+            autoComplete="off"
+            autoCorrect="off"
+            spellCheck={false}
+            ref={handler}
+            style={{ width: '100%' }}
+            value={inputValue}
+            onChange={(event) => {
+              const { value, selectionStart, selectionEnd } = event.target
+              setSelection({ selectionStart, selectionEnd })
+              setInputValue(toTitle(value))
+              setSelectAll(false)
+            }}
+            onPaste={(event) => {
+              const { selectionStart, selectionEnd } = event.target
+              if (
+                selectionEnd === -1 ||
+                (selectionStart === 0 && selectionEnd === inputValue.length)
+              ) {
+                setSelectAll(true)
+              }
+            }}
+          />
+          <button
+            className={`copy-to-clip margin-left-sm js-copy-to-clip js-tooltip-trigger ${
+              inputValue ? 'visible' : ''
+            }`}
+            type="button"
+            data-success-title="Copied!"
+            aria-controls="content-to-copy"
+            tabIndex="0"
+            onClick={handleCopy}
+          >
+            <svg
+              className="icon icon--xs"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              color="#fff"
+            >
+              <path
+                d="M12,2h.5A1.5,1.5,0,0,1,14,3.5v10A1.5,1.5,0,0,1,12.5,15h-9A1.5,1.5,0,0,1,2,13.5V3.5A1.5,1.5,0,0,1,3.5,2H4"
+                fill="none"
+                stroke="currentColor"
+                strokeMiterlimit="10"
+                strokeWidth="2"
+              ></path>
+              <rect
+                x="6"
+                y="1"
+                width="4"
+                height="2"
+                fill="currentColor"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              ></rect>
+              <polyline
+                className={`copy-to-clip__icon-check ${
+                  isCopySuccess ? 'active' : ''
+                }`}
+                points="5 9 7 11 11 7"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              ></polyline>
+            </svg>
+            <span>Copy Title!</span>
+          </button>
+        </div>
       </section>
 
       <aside>
@@ -110,6 +174,10 @@ const Index = () => {
         body > div:first-child > div:first-child > div {
           height: inherit;
         }
+        div.input-div {
+          display: flex;
+          align-items: center;
+        }
         input {
           box-sizing: border-box;
           padding: 9.5px 15px;
@@ -125,10 +193,60 @@ const Index = () => {
           outline: none;
           border-color: #000;
         }
+        button.copy-to-clip.margin-left-sm.js-copy-to-clip.js-tooltip-trigger {
+          background: inherit;
+          padding: 0px;
+          border: none;
+          visibility: hidden;
+          opacity: 0;
+          transition: visibility 0.2s, opacity 0.2s;
+        }
+        button.copy-to-clip.margin-left-sm.js-copy-to-clip.js-tooltip-trigger.visible {
+          visibility: visible;
+          margin-top: 5px;
+          opacity: 1;
+        }
+        button.copy-to-clip span {
+          display: none;
+        }
+        @keyframes drawCheckmark {
+          0% {
+            stroke-dashoffset: 12;
+          }
+          50% {
+            stroke-dashoffset: 0;
+          }
+          100% {
+            stroke-dashoffset: -12;
+          }
+        }
+        .copy-to-clip__icon-check {
+          stroke-dasharray: 12;
+          stroke-dashoffset: 12;
+          transition: opacity 0.5s ease-in-out;
+        }
+        .copy-to-clip__icon-check.active {
+          animation: drawCheckmark 1.5s forwards;
+          opacity: 1;
+        }
         @media (min-width: 768px) {
           input {
             min-width: 300px;
             max-width: 620px;
+          }
+        }
+        @media (max-width: 400px) {
+          div.input-div {
+            display: flex;
+            flex-direction: column;
+          }
+          button.copy-to-clip.margin-left-sm.js-copy-to-clip.js-tooltip-trigger.visible {
+            margin-top: 25px;
+          }
+          button.copy-to-clip.visible span {
+            display: inline-block;
+            color: #fff;
+            margin-left: 7px;
           }
         }
         @media (prefers-color-scheme: dark) {
